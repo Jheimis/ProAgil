@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProAgil.api.Model;
 
 namespace ProAgil.api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -24,16 +25,26 @@ namespace ProAgil.api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<Evento> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return new Evento[]{
+                new Evento(){
+                    eventoId = 1 ,
+                    tema = "Angular e .NET Core",
+                    local = "Belo Horizonte",
+                    qtdPessoas = 250,
+                    dataEvento = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy")
+
+                },
+                 new Evento(){
+                    eventoId = 2 ,
+                    tema = "Angular e suas novidades",
+                    local = "São Paulo",
+                    qtdPessoas = 550,
+                    dataEvento = DateTime.Now.AddDays(3).ToString("dd/MM/yyyy")
+
+                }
+            };
         }
     }
 }
