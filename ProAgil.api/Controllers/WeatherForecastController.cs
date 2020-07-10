@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProAgil.api.Data;
 using ProAgil.api.Model;
 
 namespace ProAgil.api.Controllers
@@ -12,39 +13,27 @@ namespace ProAgil.api.Controllers
     [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        //Usado para passar informação do banco
+        public DataContext Context { get; }
+        public WeatherForecastController(DataContext context)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+            this.Context = context;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        }
+        //Lista tudo que esta no banco
+        [HttpGet]
+        public ActionResult<IEnumerable<Evento>> Get()
         {
-            _logger = logger;
+           return Context.Eventos.ToList();
+            
         }
 
-        [HttpGet]
-        public IEnumerable<Evento> Get()
+        //Consulta com ID
+        [HttpGet("{id}")]
+        public ActionResult<Evento> Get(int id)
         {
-            return new Evento[]{
-                new Evento(){
-                    eventoId = 1 ,
-                    tema = "Angular e .NET Core",
-                    local = "Belo Horizonte",
-                    qtdPessoas = 250,
-                    dataEvento = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy")
-
-                },
-                 new Evento(){
-                    eventoId = 2 ,
-                    tema = "Angular e suas novidades",
-                    local = "São Paulo",
-                    qtdPessoas = 550,
-                    dataEvento = DateTime.Now.AddDays(3).ToString("dd/MM/yyyy")
-
-                }
-            };
+           return Context.Eventos.FirstOrDefault(x => x.eventoId == id);
+            
         }
     }
 }
