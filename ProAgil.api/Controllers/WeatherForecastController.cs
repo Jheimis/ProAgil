@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProAgil.api.Data;
 using ProAgil.api.Model;
@@ -22,17 +24,34 @@ namespace ProAgil.api.Controllers
         }
         //Lista tudo que esta no banco
         [HttpGet]
-        public ActionResult<IEnumerable<Evento>> Get()
+        public async Task<IActionResult> Get()
         {
-           return Context.Eventos.ToList();
+           try
+           {    
+               var results = await Context.Eventos.ToListAsync();
+               return Ok(results);
+           }
+           catch (System.Exception)
+           {
+             return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de dados falhou.");
+           }
+           
             
         }
 
         //Consulta com ID
         [HttpGet("{id}")]
-        public ActionResult<Evento> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-           return Context.Eventos.FirstOrDefault(x => x.eventoId == id);
+            try
+           {    
+               var results = await Context.Eventos.FirstOrDefaultAsync(x => x.eventoId == id);
+               return Ok(results);
+           }
+           catch (System.Exception)
+           {
+             return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de dados falhou.");
+           }
             
         }
     }
