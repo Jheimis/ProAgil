@@ -3,6 +3,7 @@
 # .Net Core
 bin
 obj
+.vscode
 
 # compiled output
 /dist
