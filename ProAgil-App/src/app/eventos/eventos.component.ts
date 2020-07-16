@@ -7,19 +7,27 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
-
-  eventos: any;
+  
+  eventos: any = [];
+  imagemLargura = 50;
+  imagemMargem = 2;
+  mostrarImagem = false;
+  
   constructor(private http: HttpClient) { }
-
+  
   ngOnInit() {
     this.getEventos();
   }
-
+  
+  alterarImagem(){
+    this.mostrarImagem = !this.mostrarImagem;
+  }
+  
   getEventos() {
     this.http.get('http://localhost:5000/api/WeatherForecast').subscribe(reponse => {
-      this.eventos = reponse;
-    }, error => {console.log(error); }
-    );
-  }
+    this.eventos = reponse;
+  }, error => {console.log(error); }
+  );
+}
 
 }
