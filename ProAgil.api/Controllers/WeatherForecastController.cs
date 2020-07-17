@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using ProAgil.api.Data;
-using ProAgil.api.Model;
+using ProAgil.Repository;
 
 namespace ProAgil.api.Controllers
 {
@@ -16,10 +15,10 @@ namespace ProAgil.api.Controllers
     public class WeatherForecastController : ControllerBase
     {
         //Usado para passar informação do banco
-        public DataContext Context { get; }
-        public WeatherForecastController(DataContext context)
+        public ProAgilContext _context { get; }
+        public WeatherForecastController(ProAgilContext context)
         {
-            this.Context = context;
+            this._context = context;
 
         }
         //Lista tudo que esta no banco
@@ -28,7 +27,7 @@ namespace ProAgil.api.Controllers
         {
            try
            {    
-               var results = await Context.Eventos.ToListAsync();
+               var results = await _context.Eventos.ToListAsync();
                return Ok(results);
            }
            catch (System.Exception)
@@ -40,12 +39,12 @@ namespace ProAgil.api.Controllers
         }
 
         //Consulta com ID
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> Get(int Id)
         {
             try
            {    
-               var results = await Context.Eventos.FirstOrDefaultAsync(x => x.eventoId == id);
+               var results = await _context.Eventos.FirstOrDefaultAsync(x => x.id == Id);
                return Ok(results);
            }
            catch (System.Exception)
