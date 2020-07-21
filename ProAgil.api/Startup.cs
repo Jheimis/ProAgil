@@ -28,6 +28,7 @@ namespace ProAgil.api
         public void ConfigureServices(IServiceCollection services)
         {   //String de conexão com o banco
             services.AddDbContext<ProAgilContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IProAgilRepository, ProAgilRepository>();
             services.AddControllers();
             services.AddCors();
         }
