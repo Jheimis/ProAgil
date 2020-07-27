@@ -11,6 +11,6 @@ namespace ProAgil.Domain
         public DateTime? dataFim { get; set; }
         public int quantidade { get; set; }
         public int eventoId { get; set; }   
-        public Evento evento { get; set; }
+        public Evento evento { get;}
     }
 }
