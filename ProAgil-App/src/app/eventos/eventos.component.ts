@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {EventoService} from '../_services/evento.service'
+import { Evento } from '../_models/Evento';
 
 @Component({
   selector: 'app-eventos',
@@ -17,14 +18,14 @@ export class EventosComponent implements OnInit {
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
   
-  eventosFiltrados: any = [];
-  eventos: any = [];
+  eventosFiltrados: Evento[];
+  eventos: Evento[];
   imagemLargura = 50;
   imagemMargem = 2;
   mostrarImagem = false;
   
   
-  constructor(private http: HttpClient) { }
+  constructor(private eventoService : EventoService) { }
   
   ngOnInit() {
     this.getEventos();
@@ -42,9 +43,12 @@ export class EventosComponent implements OnInit {
   }
   
   getEventos() {
-    this.http.get('http://localhost:5000/api/WeatherForecast').subscribe(reponse => {
-    this.eventos = reponse;
-  }, error => {console.log(error); }
+    this.eventoService.getAllEvento().subscribe(( _eventos : Evento[]) => {
+    this.eventos = _eventos;
+    this.eventosFiltrados = this.eventos;
+    console.log(_eventos);
+  }, 
+  error => {console.log(error); }
   );
 }
 
