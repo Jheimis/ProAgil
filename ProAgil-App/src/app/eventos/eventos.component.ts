@@ -9,7 +9,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
-  
   eventosFiltrados: Evento[];
   eventos: Evento[];
   imagemLargura = 50;
@@ -17,7 +16,7 @@ export class EventosComponent implements OnInit {
   mostrarImagem = false;
   modalRef: BsModalRef;
 
-  _filtroLista: string;
+  _filtroLista = '';
 
   constructor(
     private eventoService : EventoService,

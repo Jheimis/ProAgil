@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";//Importação para usar o Two-way Data Binding
@@ -25,6 +26,7 @@ import { NavComponent } from './nav/nav.component';
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       TooltipModule.forRoot(),
       ModalModule.forRoot(),
