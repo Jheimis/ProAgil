@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {  HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";//Importação para usar o Two-way Data Binding
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";//Importação para usar o Two-way Data Binding
 import { AppRoutingModule } from './app-routing.module';
 import { ModalModule} from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -34,7 +34,8 @@ import { DateTimeFormat } from './_helps/DateTimeFormatPipe.pipe';
       ModalModule.forRoot(),
       AppRoutingModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [
       EventoService
