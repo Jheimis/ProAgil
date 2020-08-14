@@ -8,13 +8,14 @@ import { ModalModule} from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
+
 import { EventoService } from './_services/evento.service';
 
 
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { NavComponent } from './nav/nav.component';
-import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
+import { DateTimeFormat } from './_helps/DateTimeFormatPipe.pipe';
 
 
 
@@ -23,7 +24,7 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
       AppComponent,
       EventosComponent,
       NavComponent,
-      DateTimeFormatPipePipe
+      DateTimeFormat
    ],
    imports: [
       BrowserModule,
