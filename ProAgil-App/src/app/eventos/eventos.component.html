@@ -99,14 +99,14 @@
   <div class="form-row">
     <div class="form-group col-md-8">
       <label>Local</label>
-      <input type="text" class="form-control is-invalid" formControlName="local" >
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': registerForm.get('local').errors && registerForm.get('local').touched}" formControlName="local" >
       <div class="invalid-feedback">
         Local é obrigatório
       </div>
     </div>
     <div class="form-group col-md-4">
       <label>Data e Hora</label>
-      <input type="text" class="form-control is-invalid "formControlName="dataEvento">
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': registerForm.get('dataEvento').errors && registerForm.get('dataEvento').touched}" formControlName="dataEvento">
       <div class="invalid-feedback">
         Data e hora é obrigatório
       </div>
@@ -115,15 +115,18 @@
   <div class="form-row">
     <div class="form-group col-md-3">
       <label>Qtd pessoas</label>
-      <input type="text" class="form-control is-invalid" formControlName="qtdPessoas">
-      <div class="invalid-feedback">
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': registerForm.get('qtdPessoas').errors && registerForm.get('qtdPessoas').touched}" formControlName="qtdPessoas">
+      <div class="invalid-feedback" *ngIf="registerForm.get('qtdPessoas').hasError('required')">
         Quantidade de pessoas é obrigatório
+      </div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('qtdPessoas').hasError('max')">
+        A quantidade maxima de pessoas é de 12.000
       </div>
     </div>
     <div class="form-group col-md-9">
       <label>Imagem</label>
-      <input type="text" class="form-control is-invalid" formControlName="imageURL">
-      <div class="invalid-feedback">
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': registerForm.get('ImageUrl').errors && registerForm.get('imageUrl').touched}" formControlName="imageURL">
+      <div class="invalid-feedback" *ngIf="registerForm.get('imageURL').hasError('imageURL')">
         Imagem é obrigatório
       </div>
     </div>
@@ -131,15 +134,15 @@
   <div class="form-row">
     <div class="form-group col-md-4">
       <label>Telefone</label>
-      <input type="text" class="form-control is-invalid" formControlName="telefone">
-      <div class="invalid-feedback">
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': registerForm.get('telefone').errors && registerForm.get('telefone').touched}" formControlName="telefone">
+      <div class="invalid-feedback" *ngIf="registerForm.get('telefone').hasError('required')">
         Telefone é obrigatório
       </div>
     </div>
     <div class="form-group col-md-8">
       <label>Email</label>
-      <input type="text" class="form-control is-invalid" formControlName="email">
-      <div class="invalid-feedback">
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}" formControlName="email">
+      <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('required')">
         Email é obrigatório
       </div>
     </div>
